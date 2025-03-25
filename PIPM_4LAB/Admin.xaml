@@ -5,19 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PIPM_4LAB"
         mc:Ignorable="d"
-        Title="Admin" Height="450" Width="800">
+        Title="Admin" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="193*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal" Margin="5">
+        <StackPanel Orientation="Horizontal" Margin="5,5,5,5" Grid.ColumnSpan="2">
             <Label Content="Products" VerticalAlignment="Center"/>
         </StackPanel>
 
-        <DataGrid Name="UsersDataGrid" Grid.Row="1" Margin="5" AutoGenerateColumns="False" HeadersVisibility="Column">
+        <DataGrid Name="UsersDataGrid" Grid.Row="1" Margin="5,5,5,5" AutoGenerateColumns="False" HeadersVisibility="Column" Grid.ColumnSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Product Name" Binding="{Binding Name}" Width="*"/>
                 <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="*"/>
@@ -26,7 +30,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="52,5,0,5" Grid.Column="1">
             <Button Name="Delete" Content="Удалить" Width="150" Margin="5" Click="Delete_Click"/>
             <Button Name="Add" Content="Добавить" Width="150" Margin="5" Click="Add_Click"/>
             <Button Name="Change" Content="Изменить" Width="150" Margin="5" Click="Change_Click"/>

@@ -35,8 +35,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -67,11 +76,35 @@
     <Compile Include="Delete.xaml.cs">
       <DependentUpon>Delete.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Products.cs">
+      <DependentUpon>ProductsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductsModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductsModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductsModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductsModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductsModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Roles.cs">
+      <DependentUpon>ProductsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="User.xaml.cs">
       <DependentUpon>User.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Users.cs">
+      <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
     <Page Include="Add.xaml">
       <SubType>Designer</SubType>
@@ -128,6 +161,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="ProductsModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ProductsModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="packages.config" />
+    <None Include="ProductsModel.edmx.diagram">
+      <DependentUpon>ProductsModel.edmx</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -135,6 +176,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ProductsModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ProductsModel.Context.cs</LastGenOutput>
+      <DependentUpon>ProductsModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="ProductsModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProductsModel.edmx</DependentUpon>
+      <LastGenOutput>ProductsModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

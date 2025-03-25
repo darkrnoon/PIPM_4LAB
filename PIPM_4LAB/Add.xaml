@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PIPM_4LAB"
         mc:Ignorable="d"
-        Title="Add" Height="400" Width="350">
+        Title="Add" Height="400" Width="350" WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel Margin="20">
             <Label Content="Название товара" HorizontalAlignment="Left"/>
