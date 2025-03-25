@@ -32,7 +32,7 @@ namespace PIPM_4LAB
             string quantityText = ProductQuantityTextBox.Text.Trim();
             string newImagePath = ProductImageTextBox.Text.Trim();
 
-            if (string.IsNullOrEmpty(newName) || !Regex.IsMatch(newName, @"[A-Za-zА-Яа-яЁё]+"))
+            if (string.IsNullOrEmpty(newName))
             {
                 MessageBox.Show("Название товара должно содержать хотя бы одну букву.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;

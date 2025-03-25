@@ -29,6 +29,7 @@ namespace PIPM_4LAB
             }
         }
 
+
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             string productName = NameTextBox.Text.Trim();
@@ -36,7 +37,7 @@ namespace PIPM_4LAB
             string quantityText = QuantityTextBox.Text.Trim();
             string imageText = ImageTextBox.Text.Trim();
 
-            if (string.IsNullOrEmpty(productName) || !Regex.IsMatch(productName, @"^[a-zA-Zа-яА-ЯёЁ]+$"))
+            if (string.IsNullOrEmpty(productName))
             {
                 MessageBox.Show("Название товара должно содержать хотя бы одну букву.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
