@@ -73,9 +73,6 @@
     <Compile Include="Change.xaml.cs">
       <DependentUpon>Change.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Delete.xaml.cs">
-      <DependentUpon>Delete.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Products.cs">
       <DependentUpon>ProductsModel.tt</DependentUpon>
     </Compile>
@@ -115,10 +112,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Change.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Delete.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

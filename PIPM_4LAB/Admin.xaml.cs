@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
+
 
 namespace PIPM_4LAB
 {
@@ -26,10 +26,25 @@ namespace PIPM_4LAB
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            var selectedProducts = UsersDataGrid.SelectedItems.Cast<Products>().ToList();
-            if (selectedProducts.Count == 0)
+            if (UsersDataGrid.SelectedItems.Count == 0)
             {
                 MessageBox.Show("Выберите хотя бы один продукт для удаления", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            List<Products> selectedProducts = new List<Products>();
+
+            foreach (var item in UsersDataGrid.SelectedItems)
+            {
+                if (item is Products product)
+                {
+                    selectedProducts.Add(product);
+                }
+            }
+
+            if (selectedProducts.Count == 0)
+            {
+                MessageBox.Show("Выбраны некорректные элементы. Попробуйте снова.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -38,7 +53,16 @@ namespace PIPM_4LAB
                 db.Products.Remove(product);
                 productsList.Remove(product);
             }
-            db.SaveChanges();
+
+            try
+            {
+                db.SaveChanges();
+                MessageBox.Show("Выбранные товары удалены.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при удалении: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
@@ -57,7 +81,7 @@ namespace PIPM_4LAB
                 var changeWindow = new Change(selectedProduct);
                 if (changeWindow.ShowDialog() == true)
                 {
-                    UsersDataGrid.Items.Refresh(); // Обновление DataGrid
+                    UsersDataGrid.Items.Refresh(); 
                 }
             }
             else

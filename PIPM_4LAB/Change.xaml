@@ -1,13 +1,10 @@
 ﻿<Window x:Class="PIPM_4LAB.Change"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PIPM_4LAB"
-        mc:Ignorable="d"
-        Title="Change" Height="400" Width="300" WindowStartupLocation="CenterScreen">
+        Title="Change" Height="450" Width="300" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -29,7 +26,12 @@
             <TextBox Name="ProductQuantityTextBox" Width="250"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,10">
+        <StackPanel Grid.Row="3" Margin="20">
+            <Label Content="Новое изображение (путь или URL):"/>
+            <TextBox Name="ProductImageTextBox" Width="250"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,10">
             <Button Content="Назад" Width="120" Height="40" Click="BackButton_Click" Margin="5"/>
             <Button Content="Изменить товар" Width="120" Height="40" Click="ChangeButton_Click" Margin="5"/>
         </StackPanel>

@@ -22,6 +22,7 @@ namespace PIPM_4LAB
             ProductNameTextBox.Text = product.Name;
             ProductPriceTextBox.Text = product.Price.ToString();
             ProductQuantityTextBox.Text = product.Quantity.ToString();
+            ProductImageTextBox.Text = product.Image;
         }
 
         private void ChangeButton_Click(object sender, RoutedEventArgs e)
@@ -29,39 +30,50 @@ namespace PIPM_4LAB
             string newName = ProductNameTextBox.Text.Trim();
             string priceText = ProductPriceTextBox.Text.Trim();
             string quantityText = ProductQuantityTextBox.Text.Trim();
+            string newImagePath = ProductImageTextBox.Text.Trim();
 
-            // Проверка, чтобы название не было пустым и содержало хотя бы одну букву
-            if (string.IsNullOrEmpty(newName) || !Regex.IsMatch(newName, @"[A-Za-z]"))
+            if (string.IsNullOrEmpty(newName) || !Regex.IsMatch(newName, @"[A-Za-zА-Яа-яЁё]+"))
             {
                 MessageBox.Show("Название товара должно содержать хотя бы одну букву.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            // Проверка на цену (должна быть числом)
             if (!decimal.TryParse(priceText, out decimal price))
             {
                 MessageBox.Show("Цена должна быть числом.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            // Проверка на количество (должно быть числом)
             if (!int.TryParse(quantityText, out int quantity))
             {
                 MessageBox.Show("Количество должно быть целым числом.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
+            if (!string.IsNullOrEmpty(newImagePath))
+            {
+                Uri imageUri;
+                bool isValidUri = Uri.TryCreate(newImagePath, UriKind.Absolute, out imageUri) &&
+                                  (imageUri.Scheme == Uri.UriSchemeHttp || imageUri.Scheme == Uri.UriSchemeHttps || imageUri.Scheme == Uri.UriSchemeFile);
+
+                if (!isValidUri)
+                {
+                    MessageBox.Show("Некорректный путь или URL изображения. Проверьте ввод.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+            }
+
             try
             {
-                // Обновляем все данные, включая название
                 product.Name = newName;
                 product.Price = price;
                 product.Quantity = quantity;
+                product.Image = newImagePath;
 
                 db.SaveChanges();
                 MessageBox.Show("Товар изменен", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                this.DialogResult = true; // Сигнал для обновления DataGrid
+                this.DialogResult = true;
                 this.Close();
             }
             catch (Exception ex)

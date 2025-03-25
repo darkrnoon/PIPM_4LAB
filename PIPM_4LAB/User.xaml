@@ -13,16 +13,22 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal" Margin="5">
-            <Label Content="Products" VerticalAlignment="Center"/>
+        <StackPanel Orientation="Horizontal" Margin="5,5,5,5" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+            <Label Content="Товары" VerticalAlignment="Center" FontWeight="Bold" FontSize="20"/>
         </StackPanel>
 
-        <DataGrid Name="UsersDataGrid" Grid.Row="1" Margin="5" AutoGenerateColumns="False" HeadersVisibility="Column">
+        <DataGrid Name="UsersDataGrid" Grid.Row="1" Margin="5,5,5,5" AutoGenerateColumns="False" HeadersVisibility="Column" Grid.ColumnSpan="2">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Product Name" Binding="{Binding Name}" Width="*"/>
-                <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="*"/>
-                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="*"/>
-                <DataGridTextColumn Header="Image" Binding="{Binding Image}" Width="*"/>
+                <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Цена" Binding="{Binding Price}" Width="*"/>
+                <DataGridTextColumn Header="Количество" Binding="{Binding Quantity}" Width="*"/>
+                <DataGridTemplateColumn Header="Изображение">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Margin="10" Width="100" Height="100" Source="{Binding Image}" Stretch="Uniform" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">

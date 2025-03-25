@@ -15,6 +15,19 @@ namespace PIPM_4LAB
         {
             InitializeComponent();
         }
+        private void BrowseButton_Click(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog
+            {
+                Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif",
+                Title = "Выберите изображение"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                ImageTextBox.Text = openFileDialog.FileName;
+            }
+        }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
@@ -23,48 +36,52 @@ namespace PIPM_4LAB
             string quantityText = QuantityTextBox.Text.Trim();
             string imageText = ImageTextBox.Text.Trim();
 
-            // Проверка, чтобы название не было пустым и содержало хотя бы одну букву
-            if (string.IsNullOrEmpty(productName) || !Regex.IsMatch(productName, @"[A-Za-z]"))
+            if (string.IsNullOrEmpty(productName) || !Regex.IsMatch(productName, @"^[a-zA-Zа-яА-ЯёЁ]+$"))
             {
                 MessageBox.Show("Название товара должно содержать хотя бы одну букву.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            // Проверка на цену (должна быть числом)
             if (!decimal.TryParse(priceText, out decimal price))
             {
                 MessageBox.Show("Цена должна быть числом.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            // Проверка на количество (должно быть числом)
             if (!int.TryParse(quantityText, out int quantity))
             {
                 MessageBox.Show("Количество должно быть целым числом.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            // Проверка на изображение (может содержать буквы и цифры)
-            if (!Regex.IsMatch(imageText, @"^[A-Za-z0-9]+$") && !string.IsNullOrEmpty(imageText))
+            if (!string.IsNullOrEmpty(imageText))
             {
-                MessageBox.Show("Изображение должно содержать только буквы и цифры.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
+                Uri imageUri = null;
+                bool isValidUri = Uri.TryCreate(imageText, UriKind.Absolute, out imageUri) &&
+                                  (imageUri.Scheme == Uri.UriSchemeHttp || imageUri.Scheme == Uri.UriSchemeHttps || imageUri.Scheme == Uri.UriSchemeFile);
 
-            NewProduct = new Products
-            {
-                Name = productName,
-                Price = price,
-                Quantity = quantity,
-                Image = imageText
-            };
+                if (!isValidUri)
+                {
+                    MessageBox.Show("Некорректный путь к изображению. Убедитесь, что путь правильный.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+            }
 
             try
             {
-                db.Products.Add(NewProduct);
+                var product = new Products
+                {
+                    Name = productName,
+                    Price = price,
+                    Quantity = quantity,
+                    Image = imageText  
+                };
+
+                db.Products.Add(product);
                 db.SaveChanges();
-                MessageBox.Show("Товар добавлен", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-                this.DialogResult = true; // Сигнал Admin о добавлении
+
+                NewProduct = product;
+                this.DialogResult = true;
                 this.Close();
             }
             catch (Exception ex)
@@ -73,17 +90,9 @@ namespace PIPM_4LAB
             }
         }
 
-        private void SelectImageButton_Click(object sender, RoutedEventArgs e)
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog
-            {
-                Filter = "Изображения|*.png;*.jpg;*.jpeg;*.bmp"
-            };
-
-            if (openFileDialog.ShowDialog() == true)
-            {
-                ImageTextBox.Text = openFileDialog.FileName;
-            }
+            this.Close();
         }
     }
 }

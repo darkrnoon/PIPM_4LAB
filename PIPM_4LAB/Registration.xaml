@@ -41,7 +41,6 @@
         <Button Content="Зарегистрироваться" Grid.Row="5" Grid.ColumnSpan="2" 
             HorizontalAlignment="Center" Width="150" Margin="10" Click="RegisterButton_Click"/>
 
-        <!-- Кнопка "Назад" -->
         <Button Content="Назад" Grid.Row="6" Grid.ColumnSpan="2" 
             HorizontalAlignment="Center" Width="150" Margin="10" Click="Button_Click"/>
     </Grid>
