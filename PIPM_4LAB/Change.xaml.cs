@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -23,6 +24,20 @@ namespace PIPM_4LAB
             ProductPriceTextBox.Text = product.Price.ToString();
             ProductQuantityTextBox.Text = product.Quantity.ToString();
             ProductImageTextBox.Text = product.Image;
+        }
+
+        private void BrowseButton_Click(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog
+            {
+                Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif",
+                Title = "Выберите изображение"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                ProductImageTextBox.Text = openFileDialog.FileName;
+            }
         }
 
         private void ChangeButton_Click(object sender, RoutedEventArgs e)

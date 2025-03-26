@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PIPM_4LAB", "PIPM_4LAB\PIPM_4LAB.csproj", "{279087C7-1110-44F2-AAA7-45A81FB8D63C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{789C0849-3740-4AC0-98BA-3024EF732AD7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{279087C7-1110-44F2-AAA7-45A81FB8D63C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{279087C7-1110-44F2-AAA7-45A81FB8D63C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{279087C7-1110-44F2-AAA7-45A81FB8D63C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{789C0849-3740-4AC0-98BA-3024EF732AD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{789C0849-3740-4AC0-98BA-3024EF732AD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{789C0849-3740-4AC0-98BA-3024EF732AD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{789C0849-3740-4AC0-98BA-3024EF732AD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
